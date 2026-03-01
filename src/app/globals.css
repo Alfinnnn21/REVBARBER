@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --background: #000000;
+  --foreground: #F5F5F7;
+  --primary-gold: #C5A059;
+  --secondary-charcoal: #1A1A1A;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-gold: var(--primary-gold);
+  --color-charcoal: var(--secondary-charcoal);
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+}
+
+/* Custom Utilities */
+.glass {
+  background: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(197, 160, 89, 0.2);
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #C5A059 0%, #E8C17F 50%, #C5A059 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-border {
+  border: 1px solid var(--primary-gold);
+}
+
+.gold-bg {
+  background: var(--primary-gold);
+  color: #000;
+}
+
+.gold-bg:hover {
+  background: #E8C17F;
+}
+
