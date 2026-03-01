@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Scissors, Clock, MapPin, Phone, Instagram, Facebook, ArrowRight, Star, Quote } from "lucide-react";
+import { Scissors, Clock, MapPin, Phone, Instagram, Facebook, ArrowRight, Star, Quote, Zap, Wind } from "lucide-react";
 import { useRef } from "react";
 
 export default function Home() {
@@ -13,10 +13,10 @@ export default function Home() {
   });
 
   const services = [
-    { title: "Gentlemen's Haircut", price: "Rp 150k", desc: "Precision cut tailored to your character." },
-    { title: "Royal Beard Shave", price: "Rp 100k", desc: "Traditional hot towel treatment." },
-    { title: "Signature Styling", price: "Rp 75k", desc: "The perfect finish for your look." },
-    { title: "Scalp Treatment", price: "Rp 120k", desc: "Revitalizing care for hair health." },
+    { title: "HAIRCUT", icon: <Scissors className="w-8 h-8" />, desc: "Any cut to your taste followed by a professional finish." },
+    { title: "SHAVING", icon: <Scissors className="w-8 h-8 rotate-45" />, desc: "For premium result, at our barbershop, we combine traditional." },
+    { title: "STYLING", icon: <Wind className="w-8 h-8" />, desc: "Keep looking your best with our professional stylists." },
+    { title: "TRIMMING", icon: <Zap className="w-8 h-8" />, desc: "Looking to try something new with your facial hair." },
   ];
 
   const barbers = [
@@ -45,7 +45,7 @@ export default function Home() {
       </nav>
 
       {/* Hero: Editorial Style */}
-      <section className="relative h-[110vh] flex items-center justify-center">
+      <section className="relative h-screen flex items-center justify-center">
         <div className="absolute inset-0 z-0 scale-110">
           <Image
             src="/images/ravbarber_hero_1772360063178.png"
@@ -69,9 +69,9 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "circOut" }}
           >
-            <h2 className="text-[10px] uppercase tracking-[0.8em] font-bold mb-8 opacity-60">Redefining Classics</h2>
-            <h1 className="text-7xl md:text-[11rem] font-serif leading-none mb-12 tracking-tighter">
-              Crafting <br /> <span className="italic pl-12 md:pl-32">Confidence</span>
+            <h2 className="text-[10px] uppercase tracking-[0.8em] font-bold mb-6 opacity-60">Redefining Classics</h2>
+            <h1 className="text-6xl md:text-8xl font-serif leading-none mb-10 tracking-tighter">
+              Crafting <br /> <span className="italic pl-12 md:pl-24">Confidence</span>
             </h1>
             <div className="flex flex-wrap justify-center gap-8">
               <button className="btn-luxury">Explore Collection</button>
@@ -128,19 +128,23 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="divide-y divide-black/5">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {services.map((s, i) => (
               <motion.div
                 key={i}
-                whileHover={{ x: 20 }}
-                className="py-12 flex flex-col md:flex-row justify-between items-start md:items-center group cursor-pointer transition-all"
+                whileHover={{ y: -10 }}
+                className="bg-[#111] p-10 text-center flex flex-col items-center group transition-all"
               >
-                <div className="space-y-2">
-                  <span className="text-[10px] font-bold opacity-30 italic">0{i + 1}</span>
-                  <h4 className="text-2xl md:text-4xl font-serif group-hover:text-gold transition-colors">{s.title}</h4>
-                  <p className="text-sm opacity-40 font-light max-w-sm">{s.desc}</p>
+                <div className="text-gold/60 mb-8 group-hover:text-gold transition-colors">
+                  {(s as any).icon}
                 </div>
-                <div className="text-2xl font-serif mt-4 md:mt-0">{s.price}</div>
+                <h4 className="text-white text-xl font-serif tracking-[0.2em] mb-6">{s.title}</h4>
+                <p className="text-white/40 text-[11px] leading-relaxed mb-8 uppercase tracking-widest h-12">
+                  {s.desc}
+                </p>
+                <button className="text-[10px] text-gold/80 font-bold uppercase tracking-[0.2em] flex items-center gap-2 hover:text-gold transition-colors">
+                  Read More <ArrowRight className="w-3 h-3" />
+                </button>
               </motion.div>
             ))}
           </div>
@@ -149,7 +153,7 @@ export default function Home() {
 
       {/* Masters Section */}
       <section id="barbers" className="section-padding">
-        <div className="text-center mb-24">
+        <div className="text-center mb-16">
           <h3 className="text-[10px] uppercase tracking-[0.5em] font-bold text-gold mb-4">The Hands</h3>
           <h2 className="text-5xl md:text-7xl font-serif">Meet the Masters</h2>
         </div>
@@ -232,7 +236,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-40 pt-12 border-t border-black/5 flex flex-col md:flex-row justify-between gap-6 text-[10px] uppercase tracking-[0.2em] opacity-30">
+        <div className="mt-20 pt-12 border-t border-black/5 flex flex-col md:flex-row justify-between gap-6 text-[10px] uppercase tracking-[0.2em] opacity-30">
           <span>&copy; 2024 RAVBARBER. All Rights Reserved.</span>
           <div className="flex gap-8">
             <span>Privacy Policy</span>

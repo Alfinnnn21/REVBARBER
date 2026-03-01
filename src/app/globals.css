@@ -77,5 +77,5 @@
 
 /* Section Spacing */
 .section-padding {
-  @apply py-32 px-6 md:px-24;
+  @apply py-12 px-6 md:px-24;
 }
