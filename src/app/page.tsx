@@ -34,14 +34,14 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-background font-sans">
+    <div className="min-h-screen bg-white text-foreground font-sans">
       {/* Navigation */}
       <nav className="fixed top-0 z-50 w-full glass py-4 px-6 md:px-12 flex justify-between items-center">
         <div className="flex items-center gap-2">
           <Scissors className="text-gold w-6 h-6" />
           <span className="text-xl font-serif font-bold tracking-widest text-gold">RAVBARBER</span>
         </div>
-        <div className="hidden md:flex gap-8 text-sm uppercase tracking-widest font-medium">
+        <div className="hidden md:flex gap-8 text-sm uppercase tracking-widest font-medium text-foreground/80">
           <a href="#about" className="hover:text-gold transition-colors">About</a>
           <a href="#services" className="hover:text-gold transition-colors">Services</a>
           <a href="#pricing" className="hover:text-gold transition-colors">Pricing</a>
@@ -59,7 +59,7 @@ export default function Home() {
             src="/images/ravbarber_hero_1772360063178.png"
             alt="Barbershop Atmosphere"
             fill
-            className="object-cover brightness-[0.3]"
+            className="object-cover brightness-[0.7]"
             priority
           />
         </div>
@@ -70,10 +70,10 @@ export default function Home() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl md:text-8xl font-serif font-bold mb-4 tracking-tighter">
+            <h1 className="text-5xl md:text-8xl font-serif font-bold mb-4 tracking-tighter text-foreground">
               The Art of <br /> <span className="gold-gradient">Grooming</span>
             </h1>
-            <p className="text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto mb-8 font-light tracking-wide">
+            <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto mb-8 font-light tracking-wide">
               Where classic craftsmanship meets modern style. Experience the pinnacle of gentlemen's grooming.
             </p>
             <div className="flex flex-col md:flex-row gap-4 justify-center">
@@ -93,7 +93,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-24 px-6 md:px-12 bg-charcoal">
+      <section id="services" className="py-24 px-6 md:px-12 bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div {...fadeInUp} className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">Our <span className="text-gold">Services</span></h2>
@@ -170,7 +170,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 bg-charcoal/50">
+      <section className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div {...fadeInUp}>
@@ -205,7 +205,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <footer id="contact" className="bg-black py-24 px-6 md:px-12 border-t border-gold/10">
+      <footer id="contact" className="bg-white py-24 px-6 md:px-12 border-t border-gold/10">
         <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-2 mb-6">
