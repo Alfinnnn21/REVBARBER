@@ -1,260 +1,246 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { Scissors, Clock, MapPin, Phone, Instagram, Facebook, ChevronRight, Star } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Scissors, Clock, MapPin, Phone, Instagram, Facebook, ArrowRight, Star, Quote } from "lucide-react";
+import { useRef } from "react";
 
 export default function Home() {
-  const fadeInUp = {
-    initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    transition: { duration: 0.6 }
-  };
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
 
   const services = [
-    {
-      title: "Gentlemen's Haircut",
-      price: "Rp 150k",
-      description: "Precision cut tailored to your face shape and style.",
-      image: "/images/haircut_service_1772360078172.png"
-    },
-    {
-      title: "Royal Beard Shave",
-      price: "Rp 100k",
-      description: "Traditional hot towel shave with premium grooming oils.",
-      image: "/images/beard_shave_service_1772360164688.png"
-    },
-    {
-      title: "Signature Styling",
-      price: "Rp 75k",
-      description: "Professional styling using high-end pomades and clays.",
-      image: "/images/ravbarber_hero_1772360063178.png"
-    }
+    { title: "Gentlemen's Haircut", price: "Rp 150k", desc: "Precision cut tailored to your character." },
+    { title: "Royal Beard Shave", price: "Rp 100k", desc: "Traditional hot towel treatment." },
+    { title: "Signature Styling", price: "Rp 75k", desc: "The perfect finish for your look." },
+    { title: "Scalp Treatment", price: "Rp 120k", desc: "Revitalizing care for hair health." },
+  ];
+
+  const barbers = [
+    { name: "Marco V.", role: "Fade Specialist", image: "/images/ravbarber_hero_1772360063178.png" },
+    { name: "Andra K.", role: "Classic Scissoring", image: "/images/haircut_service_1772360078172.png" },
   ];
 
   return (
-    <div className="min-h-screen bg-white text-foreground font-sans">
-      {/* Navigation */}
-      <nav className="fixed top-0 z-50 w-full glass py-4 px-6 md:px-12 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <Scissors className="text-gold w-6 h-6" />
-          <span className="text-xl font-serif font-bold tracking-widest text-gold">RAVBARBER</span>
+    <main ref={containerRef} className="bg-white text-foreground selection:bg-gold selection:text-white overflow-x-hidden">
+
+      {/* Dynamic Navigation */}
+      <nav className="fixed top-0 z-[100] w-full mix-blend-difference py-8 px-6 md:px-12 flex justify-between items-center text-white">
+        <div className="flex items-center gap-3">
+          <Scissors className="w-5 h-5" />
+          <span className="text-xl font-serif font-bold tracking-[0.3em]">RAVBARBER</span>
         </div>
-        <div className="hidden md:flex gap-8 text-sm uppercase tracking-widest font-medium text-foreground/80">
-          <a href="#about" className="hover:text-gold transition-colors">About</a>
+        <div className="hidden md:flex gap-12 text-[10px] uppercase tracking-[0.3em] font-bold">
+          <a href="#about" className="hover:text-gold transition-colors">Experience</a>
           <a href="#services" className="hover:text-gold transition-colors">Services</a>
-          <a href="#pricing" className="hover:text-gold transition-colors">Pricing</a>
+          <a href="#barbers" className="hover:text-gold transition-colors">Masters</a>
           <a href="#contact" className="hover:text-gold transition-colors">Contact</a>
         </div>
-        <button className="gold-bg px-6 py-2 text-xs font-bold uppercase tracking-widest rounded-sm transition-all">
-          Book Now
+        <button className="border-b border-white/30 pb-1 text-[10px] uppercase tracking-[0.3em] font-bold hover:border-white transition-all">
+          Reservations
         </button>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
+      {/* Hero: Editorial Style */}
+      <section className="relative h-[110vh] flex items-center justify-center">
+        <div className="absolute inset-0 z-0 scale-110">
           <Image
             src="/images/ravbarber_hero_1772360063178.png"
-            alt="Barbershop Atmosphere"
+            alt="Hero"
             fill
-            className="object-cover brightness-[0.7]"
+            className="object-cover opacity-90 brightness-90"
             priority
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
         </div>
 
-        <div className="relative z-10 text-center px-4">
+        <div className="absolute left-12 top-1/2 -translate-y-1/2 hidden lg:block">
+          <span className="text-sideways text-[10px] uppercase tracking-[0.5em] font-bold opacity-30">
+            Est. 2024 — Premium Grooming Lounge
+          </span>
+        </div>
+
+        <div className="relative z-10 text-center container mx-auto">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "circOut" }}
           >
-            <h1 className="text-5xl md:text-8xl font-serif font-bold mb-4 tracking-tighter text-foreground">
-              The Art of <br /> <span className="gold-gradient">Grooming</span>
+            <h2 className="text-[10px] uppercase tracking-[0.8em] font-bold mb-8 opacity-60">Redefining Classics</h2>
+            <h1 className="text-7xl md:text-[11rem] font-serif leading-none mb-12 tracking-tighter">
+              Crafting <br /> <span className="italic pl-12 md:pl-32">Confidence</span>
             </h1>
-            <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto mb-8 font-light tracking-wide">
-              Where classic craftsmanship meets modern style. Experience the pinnacle of gentlemen's grooming.
-            </p>
-            <div className="flex flex-col md:flex-row gap-4 justify-center">
-              <button className="gold-bg px-10 py-4 text-sm font-bold uppercase tracking-widest rounded-sm">
-                Explore Services
-              </button>
-              <button className="border border-gold text-gold px-10 py-4 text-sm font-bold uppercase tracking-widest rounded-sm hover:bg-gold/10 transition-all">
-                Our Story
-              </button>
+            <div className="flex flex-wrap justify-center gap-8">
+              <button className="btn-luxury">Explore Collection</button>
             </div>
           </motion.div>
         </div>
 
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
-          <div className="w-[1px] h-12 bg-gold"></div>
+        <div className="absolute right-12 bottom-24 text-right hidden lg:block">
+          <p className="text-[10px] uppercase tracking-[0.3em] font-bold opacity-40 leading-loose">
+            Luxury Standard<br />Exquisite Detail<br />Timeless Style
+          </p>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section id="services" className="py-24 px-6 md:px-12 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <motion.div {...fadeInUp} className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">Our <span className="text-gold">Services</span></h2>
-            <div className="w-24 h-[2px] bg-gold mx-auto mb-6"></div>
-            <p className="text-foreground/60 max-w-xl mx-auto">
-              We provide a range of specialized grooming services designed for the modern man.
-            </p>
+      {/* Brand Experience: Asymmetric */}
+      <section id="about" className="section-padding grid md:grid-cols-12 gap-16 items-center">
+        <div className="md:col-span-5 relative">
+          <div className="absolute -top-20 -left-10 text-9xl font-serif text-outline select-none z-0">BARBER</div>
+          <motion.div
+            whileInView={{ scale: 1.05 }}
+            transition={{ duration: 1.5 }}
+            className="relative z-10 aspect-[3/4] overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000"
+          >
+            <Image src="/images/haircut_service_1772360078172.png" alt="Detail" fill className="object-cover" />
           </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <motion.div
-                key={index}
-                {...fadeInUp}
-                transition={{ delay: index * 0.2 }}
-                className="group relative overflow-hidden rounded-sm bg-background border border-gold/10 hover:border-gold/30 transition-all"
-              >
-                <div className="relative h-64 w-full overflow-hidden">
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    fill
-                    className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
-                  />
-                </div>
-                <div className="p-8">
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-bold tracking-wide uppercase">{service.title}</h3>
-                    <span className="text-gold font-bold">{service.price}</span>
-                  </div>
-                  <p className="text-foreground/60 text-sm mb-6 leading-relaxed">
-                    {service.description}
-                  </p>
-                  <button className="text-xs font-bold uppercase tracking-widest text-gold flex items-center gap-2 group/btn">
-                    Details <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </button>
-                </div>
-              </motion.div>
-            ))}
+        </div>
+        <div className="md:col-span-1" />
+        <div className="md:col-span-6 space-y-12">
+          <h3 className="text-[10px] uppercase tracking-[0.5em] font-bold text-gold">The Philosophy</h3>
+          <h2 className="text-5xl md:text-7xl font-serif leading-tight">More than a haircut—an <span className="italic">identity</span>.</h2>
+          <p className="text-lg text-foreground/60 leading-relaxed font-light">
+            We believe that every man has a story. At RAVBARBER, we translate that story into a visual statement.
+            Our masters combine century-old techniques with modern vision to deliver an experience that goes
+            beyond the chair.
+          </p>
+          <div className="pt-8">
+            <a href="#" className="inline-flex items-center gap-4 text-xs font-bold uppercase tracking-[0.3em] group">
+              Our Story <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing" className="py-24 px-6 md:px-12">
-        <div className="max-w-4xl mx-auto">
-          <motion.div {...fadeInUp} className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">Price <span className="text-gold">List</span></h2>
-            <p className="text-foreground/60">Transparency in our quality craftsmanship.</p>
-          </motion.div>
+      {/* Services: Minimalist List */}
+      <section id="services" className="bg-soft section-padding">
+        <div className="container mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+            <div>
+              <h3 className="text-[10px] uppercase tracking-[0.5em] font-bold text-gold mb-4">The Menu</h3>
+              <h2 className="text-5xl md:text-7xl font-serif">Tailored Services</h2>
+            </div>
+            <p className="md:max-w-xs text-xs uppercase tracking-widest leading-loose opacity-60">
+              curated grooming services designed to meet the highest expectations.
+            </p>
+          </div>
 
-          <div className="space-y-6">
-            {[
-              { label: "Classic Haircut", price: "150k" },
-              { label: "Beard Trim & Detail", price: "100k" },
-              { label: "Head Shave", price: "120k" },
-              { label: "Clean Shave", price: "90k" },
-              { label: "Kid's Cut (Under 12)", price: "100k" },
-              { label: "Senior's Cut", price: "110k" },
-            ].map((item, i) => (
+          <div className="divide-y divide-black/5">
+            {services.map((s, i) => (
               <motion.div
                 key={i}
-                {...fadeInUp}
-                transition={{ delay: i * 0.1 }}
-                className="flex items-center justify-between border-b border-gold/10 pb-4 group hover:border-gold/40 transition-colors"
+                whileHover={{ x: 20 }}
+                className="py-12 flex flex-col md:flex-row justify-between items-start md:items-center group cursor-pointer transition-all"
               >
-                <span className="text-lg font-medium tracking-wide group-hover:text-gold transition-colors">{item.label}</span>
-                <div className="flex-grow mx-4 border-t border-dotted border-gold/20"></div>
-                <span className="text-xl font-serif font-bold text-gold">Rp {item.price}</span>
+                <div className="space-y-2">
+                  <span className="text-[10px] font-bold opacity-30 italic">0{i + 1}</span>
+                  <h4 className="text-2xl md:text-4xl font-serif group-hover:text-gold transition-colors">{s.title}</h4>
+                  <p className="text-sm opacity-40 font-light max-w-sm">{s.desc}</p>
+                </div>
+                <div className="text-2xl font-serif mt-4 md:mt-0">{s.price}</div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div {...fadeInUp}>
-              <h2 className="text-4xl font-serif font-bold mb-6">What They <br /> <span className="text-gold">Say About Us</span></h2>
-              <div className="space-y-8">
-                {[1, 2].map((_, i) => (
-                  <div key={i} className="glass p-8 rounded-sm">
-                    <div className="flex gap-1 mb-4">
-                      {[1, 2, 3, 4, 5].map(s => <Star key={s} className="w-4 h-4 fill-gold text-gold" />)}
-                    </div>
-                    <p className="italic text-foreground/80 mb-4 font-light">
-                      "The attention to detail at RAVBARBER is world-class. I've never had a better fade. The atmosphere is just the icing on the cake."
-                    </p>
-                    <div className="font-bold text-sm uppercase tracking-widest">— James Anderson</div>
-                  </div>
-                ))}
+      {/* Masters Section */}
+      <section id="barbers" className="section-padding">
+        <div className="text-center mb-24">
+          <h3 className="text-[10px] uppercase tracking-[0.5em] font-bold text-gold mb-4">The Hands</h3>
+          <h2 className="text-5xl md:text-7xl font-serif">Meet the Masters</h2>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+          {barbers.map((b, i) => (
+            <div key={i} className="group relative overflow-hidden">
+              <div className="aspect-[4/5] relative overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-1000">
+                <Image src={b.image} alt={b.name} fill className="object-cover scale-110 group-hover:scale-100 transition-all duration-1000" />
               </div>
-            </motion.div>
-            <motion.div
-              {...fadeInUp}
-              className="relative h-[500px] rounded-sm overflow-hidden"
-            >
-              <Image
-                src="/images/ravbarber_hero_1772360063178.png"
-                alt="Happy Client"
-                fill
-                className="object-cover"
-              />
-            </motion.div>
+              <div className="absolute bottom-10 left-10 text-white">
+                <p className="text-[10px] uppercase tracking-widest mb-2 opacity-80">{b.role}</p>
+                <h4 className="text-3xl font-serif">{b.name}</h4>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Testimonial: Atmospheric */}
+      <section className="py-32 bg-foreground text-white flex items-center justify-center overflow-hidden relative">
+        <Quote className="absolute -top-10 -left-10 w-96 h-96 opacity-5 rotate-12" />
+        <div className="max-w-4xl px-6 text-center space-y-12 relative z-10">
+          <div className="flex justify-center gap-1">
+            {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-gold text-gold" />)}
+          </div>
+          <h2 className="text-3xl md:text-5xl font-serif leading-snug italic font-light">
+            "The atmosphere is pure luxury. It's not just about the haircut,
+            it's the way they treat you. A true gentlemen's sanctuary."
+          </h2>
+          <div className="space-y-2">
+            <div className="w-12 h-[1px] bg-gold mx-auto" />
+            <p className="text-[10px] uppercase tracking-[0.5em] font-bold text-gold">Johnathan Miller</p>
+            <p className="text-[10px] opacity-40">Loyal Client since 2024</p>
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <footer id="contact" className="bg-white py-24 px-6 md:px-12 border-t border-gold/10">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
-          <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center gap-2 mb-6">
-              <Scissors className="text-gold w-8 h-8" />
-              <span className="text-2xl font-serif font-bold tracking-widest text-gold">RAVBARBER</span>
+      {/* Contact & Footer: Minimal & Clean */}
+      <footer id="contact" className="section-padding bg-white">
+        <div className="grid md:grid-cols-12 gap-16">
+          <div className="md:col-span-5 space-y-12">
+            <div className="flex items-center gap-3">
+              <Scissors className="w-6 h-6 text-gold" />
+              <span className="text-2xl font-serif font-bold tracking-[0.2em]">RAVBARBER</span>
             </div>
-            <p className="text-foreground/50 max-w-sm mb-8 leading-relaxed">
-              Experience the best in gentlemen's grooming. Established with a passion for quality and style.
+            <p className="text-lg leading-relaxed font-light opacity-60">
+              Visit our lounge for a session that will redefine your standard of grooming.
             </p>
-            <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-gold hover:text-black transition-all">
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-gold hover:text-black transition-all">
-                <Facebook className="w-5 h-5" />
-              </a>
+            <div className="space-y-6 pt-4 text-sm tracking-widest font-medium uppercase text-[10px]">
+              <div className="flex flex-col gap-2">
+                <span className="opacity-40">Visit Us</span>
+                <span>123 Gentlemen Street, City 45678</span>
+              </div>
+              <div className="flex flex-col gap-2">
+                <span className="opacity-40">Call Us</span>
+                <span>+62 812-3456-7890</span>
+              </div>
+              <div className="flex flex-col gap-2">
+                <span className="opacity-40">Hours</span>
+                <span>10:00 — 21:00 Daily</span>
+              </div>
             </div>
           </div>
 
-          <div className="space-y-4">
-            <h4 className="text-gold font-bold uppercase tracking-widest text-sm mb-6">Location</h4>
-            <div className="flex items-start gap-3 text-foreground/70">
-              <MapPin className="w-5 h-5 text-gold shrink-0" />
-              <p className="text-sm">123 Gentlemen Street,<br />Luxury District, City 45678</p>
+          <div className="md:col-span-7 grid grid-cols-2 gap-8">
+            <div className="space-y-8">
+              <h5 className="text-[10px] uppercase tracking-[0.3em] font-bold text-gold">Socials</h5>
+              <div className="flex flex-col gap-4 text-sm font-light">
+                <a href="#" className="hover:text-gold transition-colors">Instagram</a>
+                <a href="#" className="hover:text-gold transition-colors">Facebook</a>
+                <a href="#" className="hover:text-gold transition-colors">Twitter</a>
+              </div>
             </div>
-            <div className="flex items-center gap-3 text-foreground/70">
-              <Phone className="w-5 h-5 text-gold shrink-0" />
-              <p className="text-sm">+62 812-3456-7890</p>
+            <div className="space-y-8">
+              <h5 className="text-[10px] uppercase tracking-[0.3em] font-bold text-gold">Booking</h5>
+              <button className="btn-luxury w-full">Claim your spot</button>
+              <p className="text-[8px] uppercase tracking-widest opacity-40 text-center">Appointments recommended</p>
             </div>
-            <div className="flex items-center gap-3 text-foreground/70">
-              <Clock className="w-5 h-5 text-gold shrink-0" />
-              <p className="text-sm">Daily: 10:00 AM — 09:00 PM</p>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <h4 className="text-gold font-bold uppercase tracking-widest text-sm mb-6">Quick Links</h4>
-            <a href="#about" className="block text-sm text-foreground/60 hover:text-gold transition-colors">About Us</a>
-            <a href="#services" className="block text-sm text-foreground/60 hover:text-gold transition-colors">Services</a>
-            <a href="#pricing" className="block text-sm text-foreground/60 hover:text-gold transition-colors">Pricing</a>
-            <a href="#contact" className="block text-sm text-foreground/60 hover:text-gold transition-colors">Book Appointment</a>
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto mt-24 pt-8 border-t border-gold/5 text-center text-xs text-foreground/30 uppercase tracking-[0.2em]">
-          &copy; 2024 RAVBARBER. All Rights Reserved. Crafted with passion.
+        <div className="mt-40 pt-12 border-t border-black/5 flex flex-col md:flex-row justify-between gap-6 text-[10px] uppercase tracking-[0.2em] opacity-30">
+          <span>&copy; 2024 RAVBARBER. All Rights Reserved.</span>
+          <div className="flex gap-8">
+            <span>Privacy Policy</span>
+            <span>Terms of Service</span>
+          </div>
         </div>
       </footer>
-    </div>
+
+    </main>
   );
 }
-
