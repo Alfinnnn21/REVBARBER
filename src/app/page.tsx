@@ -166,9 +166,9 @@ Terima kasih!`;
         </div>
       </section>
 
-      {/* Unified Menu: Editorial Price List */}
-      <section id="services" className="bg-luxury py-24 md:py-40 text-white overflow-hidden relative">
-        <div className="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none">
+      {/* Unified Menu: Editorial Price List (White Theme) */}
+      <section id="services" className="bg-white py-24 md:py-40 text-foreground overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-1/3 h-full opacity-[0.03] pointer-events-none">
           <Scissors className="w-full h-full rotate-12 -mr-32" />
         </div>
 
@@ -186,11 +186,11 @@ Terima kasih!`;
                   onClick={() => handleBooking(s.id)}
                   className="group flex flex-col items-start gap-3 w-full text-left"
                 >
-                  <div className="flex justify-between items-end w-full border-b border-white/10 pb-4 group-hover:border-gold/50 transition-colors duration-500">
+                  <div className="flex justify-between items-end w-full border-b border-black/5 pb-4 group-hover:border-gold/50 transition-colors duration-500">
                     <h4 className="text-lg md:text-xl font-serif tracking-wide group-hover:text-gold transition-colors">{s.title}</h4>
                     <span className="text-gold font-bold text-sm tracking-widest">{s.price}</span>
                   </div>
-                  <p className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/40 leading-relaxed font-light">
+                  <p className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-foreground/40 leading-relaxed font-light">
                     {s.desc}
                   </p>
                 </button>
@@ -198,10 +198,10 @@ Terima kasih!`;
             </div>
 
             <div className="mt-20 md:mt-32 text-center">
-              <p className="text-prestige text-white/30 mb-8 italic">Custom packages available upon request</p>
+              <p className="text-prestige text-foreground/30 mb-8 italic">Custom packages available upon request</p>
               <button
                 onClick={() => handleBooking()}
-                className="btn-luxury border-white/10 text-white hover:border-gold"
+                className="btn-luxury"
               >
                 Inquire Full Catalog
               </button>
