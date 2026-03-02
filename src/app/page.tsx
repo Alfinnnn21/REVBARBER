@@ -29,22 +29,36 @@ export default function Home() {
 
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [bookingStep, setBookingStep] = useState(1);
-  const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [selectedBarber, setSelectedBarber] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [bookingInfo, setBookingInfo] = useState({ name: "", phone: "" });
 
   const handleBooking = (serviceId?: string) => {
-    if (serviceId) setSelectedService(serviceId);
+    if (serviceId) {
+      setSelectedServices([serviceId]);
+    } else {
+      setSelectedServices([]);
+    }
     setIsBookingOpen(true);
     setBookingStep(1);
   };
 
+  const toggleService = (id: string) => {
+    setSelectedServices(prev =>
+      prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]
+    );
+  };
+
   const handleWhatsApp = () => {
-    const service = services.find(s => s.id === selectedService)?.title || "";
+    const selectedTitles = services
+      .filter(s => selectedServices.includes(s.id))
+      .map(s => s.title)
+      .join(", ");
+
     const barber = barbers.find(b => b.id === selectedBarber)?.name || "Any Barber";
     const text = `Halo RAVBARBER, saya ingin booking layanan:
-Layanan: ${service}
+Layanan: ${selectedTitles}
 Barber: ${barber}
 Waktu: ${selectedTime}
 Nama: ${bookingInfo.name}
@@ -349,23 +363,40 @@ Terima kasih!`;
               </div>
 
               <div className="min-h-[350px]">
-                {/* Step 1: Service */}
+                {/* Step 1: Service (Multi-select) */}
                 {bookingStep === 1 && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {services.map((s) => (
-                      <button
-                        key={s.id}
-                        onClick={() => { setSelectedService(s.id); setBookingStep(2); }}
-                        className={`p-6 text-left border transition-all duration-500 overflow-hidden relative group ${selectedService === s.id ? 'border-gold bg-soft' : 'border-black/5 hover:border-gold/30'}`}
-                      >
-                        <div className="relative z-10 flex flex-col h-full">
-                          <p className="text-[10px] uppercase tracking-widest font-bold mb-2 text-gold">{s.price}</p>
-                          <h4 className="text-xl font-serif mb-4">{s.title}</h4>
-                          <p className="text-[10px] uppercase tracking-widest opacity-40 leading-relaxed">{s.desc}</p>
-                        </div>
-                        <div className={`absolute bottom-0 left-0 h-1 bg-gold transition-all duration-700 ${selectedService === s.id ? 'w-full' : 'w-0 group-hover:w-1/2'}`} />
-                      </button>
-                    ))}
+                  <div className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {services.map((s) => (
+                        <button
+                          key={s.id}
+                          onClick={() => toggleService(s.id)}
+                          className={`p-6 text-left border transition-all duration-500 overflow-hidden relative group ${selectedServices.includes(s.id) ? 'border-gold bg-soft shadow-inner' : 'border-black/5 hover:border-gold/30'}`}
+                        >
+                          <div className="relative z-10 flex flex-col h-full">
+                            <div className="flex justify-between items-start mb-2">
+                              <p className="text-[10px] uppercase tracking-widest font-bold text-gold">{s.price}</p>
+                              {selectedServices.includes(s.id) && (
+                                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="bg-gold text-white p-1 rounded-full">
+                                  <Zap className="w-3 h-3 fill-white" />
+                                </motion.div>
+                              )}
+                            </div>
+                            <h4 className="text-xl font-serif mb-4">{s.title}</h4>
+                            <p className="text-[10px] uppercase tracking-widest opacity-40 leading-relaxed">{s.desc}</p>
+                          </div>
+                          <div className={`absolute bottom-0 left-0 h-1 bg-gold transition-all duration-700 ${selectedServices.includes(s.id) ? 'w-full' : 'w-0 group-hover:w-1/2'}`} />
+                        </button>
+                      ))}
+                    </div>
+
+                    <button
+                      onClick={() => setBookingStep(2)}
+                      disabled={selectedServices.length === 0}
+                      className="btn-luxury w-full disabled:opacity-30 disabled:cursor-not-allowed group flex items-center justify-center gap-4 py-4"
+                    >
+                      Continue with {selectedServices.length} Selected <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+                    </button>
                   </div>
                 )}
 
