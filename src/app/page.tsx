@@ -424,6 +424,31 @@ Terima kasih!`;
                 {/* Step 4: Info */}
                 {bookingStep === 4 && (
                   <div className="space-y-6 md:space-y-8">
+                    {/* Booking Summary */}
+                    <div className="bg-soft/50 p-6 md:p-8 space-y-4 md:space-y-6 border border-black/[0.03]">
+                      <div className="space-y-1">
+                        <p className="text-prestige text-gold">Services Selected</p>
+                        <p className="text-sm md:text-base font-serif">
+                          {services
+                            .filter(s => selectedServices.includes(s.id))
+                            .map(s => s.title)
+                            .join(", ")}
+                        </p>
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-1">
+                          <p className="text-prestige text-gold">Master</p>
+                          <p className="text-sm md:text-base font-serif">
+                            {barbers.find(b => b.id === selectedBarber)?.name || "Any Master"}
+                          </p>
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-prestige text-gold">Schedule</p>
+                          <p className="text-sm md:text-base font-serif">{selectedTime}</p>
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="grid grid-cols-1 gap-4 md:gap-6">
                       <div className="space-y-1">
                         <label className="text-[8px] md:text-[9px] uppercase tracking-[0.2em] font-bold opacity-30">Full Name</label>
