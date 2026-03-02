@@ -13,10 +13,10 @@ export default function Home() {
   });
 
   const services = [
-    { title: "HAIRCUT", icon: <Scissors className="w-8 h-8" />, desc: "Any cut to your taste followed by a professional finish.", price: "Rp 150.000", id: "haircut" },
-    { title: "SHAVING", icon: <Scissors className="w-8 h-8 rotate-45" />, desc: "Commonly traditional shaving with a premium finish.", price: "Rp 100.000", id: "shaving" },
-    { title: "STYLING", icon: <Wind className="w-8 h-8" />, desc: "Keep looking your best with our professional stylists.", price: "Rp 75.000", id: "styling" },
-    { title: "TRIMMING", icon: <Zap className="w-8 h-8" />, desc: "Looking to try something new with your facial hair.", price: "Rp 85.000", id: "trimming" },
+    { title: "HAIRCUT", icon: <Scissors className="w-8 h-8" />, desc: "", price: "Rp 150.000", id: "haircut" },
+    { title: "SHAVING", icon: <Scissors className="w-8 h-8 rotate-45" />, desc: "", price: "Rp 100.000", id: "shaving" },
+    { title: "STYLING", icon: <Wind className="w-8 h-8" />, desc: "", price: "Rp 75.000", id: "styling" },
+    { title: "TRIMMING", icon: <Zap className="w-8 h-8" />, desc: "", price: "Rp 85.000", id: "trimming" },
   ];
 
   const barbers = [
