@@ -78,7 +78,7 @@ Terima kasih!`;
           <Scissors className="w-4 h-4 md:w-5 md:h-5 text-gold" />
           <span className="text-sm md:text-xl font-serif font-bold tracking-[0.2em] md:tracking-[0.3em]">RAVBARBER</span>
         </div>
-        <div className="hidden md:flex gap-12 text-[10px] uppercase tracking-[0.3em] font-bold">
+        <div className="hidden lg:flex gap-12 text-prestige">
           <a href="#about" className="hover:text-gold transition-colors">Experience</a>
           <a href="#services" className="hover:text-gold transition-colors">Services</a>
           <a href="#barbers" className="hover:text-gold transition-colors">Masters</a>
@@ -134,26 +134,27 @@ Terima kasih!`;
         </div>
       </section>
 
-      {/* Brand Experience: Symmetric Mobile Adjustments */}
-      <section id="about" className="section-padding container-custom grid md:grid-cols-12 gap-12 md:gap-16 items-center">
+      {/* Brand Experience: Editorial Asymmetric */}
+      <section id="about" className="section-padding container-custom grid md:grid-cols-12 gap-8 md:gap-16 items-center overflow-hidden">
         <div className="md:col-span-12 lg:col-span-5 relative order-2 lg:order-1">
-          <div className="absolute -top-12 md:-top-20 -left-6 md:-left-10 text-7xl md:text-9xl font-serif text-outline select-none z-0">BARBER</div>
+          <div className="absolute -top-16 md:-top-20 -left-10 md:-left-16 text-8xl md:text-[12rem] font-serif text-outline select-none z-0 opacity-40">RAV</div>
           <motion.div
-            whileInView={{ opacity: [0, 1], y: [20, 0] }}
+            initial={{ clipPath: "inset(100% 0 0 0)" }}
+            whileInView={{ clipPath: "inset(0% 0 0 0)" }}
+            transition={{ duration: 1.5, ease: "circOut" }}
             viewport={{ once: true }}
-            className="relative z-10 aspect-square md:aspect-[3/4] overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000 shadow-2xl"
+            className="relative z-10 aspect-[4/5] md:aspect-[3/4] overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000 shadow-[0_50px_100px_rgba(0,0,0,0.1)]"
           >
-            <Image src="/images/haircut_service_1772360078172.png" alt="Detail" fill className="object-cover" />
+            <Image src="/images/haircut_service_1772360078172.png" alt="Detail" fill className="object-cover scale-110" />
           </motion.div>
         </div>
         <div className="lg:col-span-1 hidden lg:block" />
-        <div className="md:col-span-12 lg:col-span-6 space-y-6 md:space-y-12 order-1 lg:order-2">
-          <h3 className="text-[10px] uppercase tracking-[0.5em] font-bold text-gold">The Philosophy</h3>
-          <h2 className="text-4xl md:text-7xl font-serif leading-tight">More than a haircut—an <span className="italic">identity</span>.</h2>
-          <p className="text-base md:text-lg text-foreground/60 leading-relaxed font-light">
-            We believe that every man has a story. At RAVBARBER, we translate that story into a visual statement.
-            Our masters combine century-old techniques with modern vision to deliver an experience that goes
-            beyond the chair.
+        <div className="md:col-span-12 lg:col-span-6 space-y-8 md:space-y-12 order-1 lg:order-2">
+          <h3 className="text-prestige text-gold">The Philosophy</h3>
+          <h2 className="text-5xl md:text-[5.5rem] font-serif leading-[0.9] md:leading-none">The art of <br /><span className="italic pl-12 md:pl-24">Precision.</span></h2>
+          <p className="text-lg md:text-xl text-foreground/70 leading-relaxed font-light max-w-lg">
+            We don't just cut hair; we curate style. RAVBARBER is the destination where heritage meets contemporary aesthetics.
+            A sanctuary for those who value the language of excellence.
           </p>
           <div className="pt-4 md:pt-8">
             <a href="#services" className="inline-flex items-center gap-4 text-xs font-bold uppercase tracking-[0.3em] group text-gold">
@@ -166,33 +167,34 @@ Terima kasih!`;
       {/* Services: Grid Sizing Fix */}
       <section id="services" className="bg-soft section-padding">
         <div className="container-custom">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24 gap-6 md:gap-8 text-center md:text-left">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 md:mb-32 gap-8 text-left">
             <div className="w-full">
-              <h3 className="text-[10px] uppercase tracking-[0.5em] font-bold text-gold mb-4">The Menu</h3>
-              <h2 className="text-4xl md:text-7xl font-serif">Tailored Services</h2>
+              <h3 className="text-prestige text-gold mb-6">The Menu</h3>
+              <h2 className="text-5xl md:text-8xl font-serif leading-none">Exquisite<br /><span className="italic">Collection</span></h2>
             </div>
-            <p className="w-full md:max-w-xs text-[10px] md:text-xs uppercase tracking-widest leading-loose opacity-60">
-              curated grooming services designed to meet the highest expectations.
+            <p className="w-full md:max-w-xs text-xs md:text-sm uppercase tracking-[0.15em] leading-loose opacity-50 font-medium">
+              A curated selection of grooming excellence for the modern gentleman.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {services.map((s, i) => (
               <motion.div
                 key={i}
-                whileHover={{ y: -5 }}
-                className="bg-[#111] p-6 md:p-8 text-center flex flex-col items-center group transition-all"
+                whileHover={{ y: -10 }}
+                className="luxury-card p-10 md:p-12 text-center flex flex-col items-center group relative overflow-hidden h-full"
               >
-                <div className="text-gold/60 mb-4 group-hover:text-gold transition-colors">
+                <div className="text-gold/30 mb-8 md:mb-12 group-hover:text-gold transition-all duration-700 scale-150 transform">
                   {(s as any).icon}
                 </div>
-                <h4 className="text-white text-base md:text-lg font-serif tracking-[0.1em] md:tracking-[0.2em] mb-2">{s.title}</h4>
-                <p className="text-gold text-xs md:text-sm font-bold tracking-[0.2em] mb-6">{s.price}</p>
+                <h4 className="text-foreground text-xl md:text-2xl font-serif tracking-[0.05em] mb-4">{s.title}</h4>
+                <div className="w-12 h-[1px] bg-black/5 mb-6 md:mb-8 group-hover:w-24 transition-all duration-700 mx-auto" />
+                <p className="text-gold text-sm font-bold tracking-[0.25em] mb-10">{s.price}</p>
                 <button
                   onClick={() => handleBooking(s.id)}
-                  className="text-[9px] md:text-[10px] text-gold/80 font-bold uppercase tracking-[0.2em] flex items-center gap-2 hover:text-gold transition-colors"
+                  className="text-prestige text-foreground hover:text-gold transition-colors flex items-center gap-4 mt-auto"
                 >
-                  Book Now <ArrowRight className="w-3 h-3" />
+                  Request Service <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
                 </button>
               </motion.div>
             ))}
@@ -202,21 +204,21 @@ Terima kasih!`;
 
       {/* Masters: Balanced Grid */}
       <section id="barbers" className="section-padding container-custom">
-        <div className="text-center mb-12 md:mb-16">
-          <h3 className="text-[10px] uppercase tracking-[0.5em] font-bold text-gold mb-4">The Hands</h3>
-          <h2 className="text-4xl md:text-7xl font-serif">Meet the Masters</h2>
+        <div className="text-center mb-24 md:mb-32">
+          <h3 className="text-prestige text-gold mb-6">The Hands</h3>
+          <h2 className="text-5xl md:text-8xl font-serif leading-none">Meet the <br /><span className="italic">Masters</span></h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
           {barbers.map((b, i) => (
-            <div key={i} className="group relative overflow-hidden shadow-xl">
-              <div className="aspect-[4/5] relative overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-1000">
+            <div key={i} className="group relative overflow-hidden luxury-card">
+              <div className="aspect-[3/4] md:aspect-[4/5] relative overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-1000">
                 <Image src={b.image} alt={b.name} fill className="object-cover scale-110 group-hover:scale-100 transition-all duration-1000" />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
-              <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 text-white">
-                <p className="text-[9px] md:text-[10px] uppercase tracking-widest mb-1 md:mb-2 opacity-80">{b.role}</p>
-                <h4 className="text-xl md:text-3xl font-serif">{b.name}</h4>
+              <div className="absolute inset-0 bg-gradient-to-t from-luxury via-transparent to-transparent opacity-90" />
+              <div className="absolute bottom-8 left-8 md:bottom-12 md:left-12 text-white">
+                <p className="text-prestige mb-3 text-white/60">{b.role}</p>
+                <h4 className="text-3xl md:text-5xl font-serif leading-none">{b.name}</h4>
               </div>
             </div>
           ))}
