@@ -351,25 +351,24 @@ Terima kasih!`;
               </div>
 
               <div className="min-h-[300px] md:min-h-[350px]">
-                {/* Step 1: Services */}
+                {/* Step 1: Services (Compact) */}
                 {bookingStep === 1 && (
-                  <div className="space-y-6">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-2 gap-2 md:gap-4">
                       {services.map((s) => (
                         <button
                           key={s.id}
                           onClick={() => toggleService(s.id)}
-                          className={`p-5 md:p-6 text-left border transition-all duration-300 relative group active:scale-98 ${selectedServices.includes(s.id) ? 'border-gold bg-soft shadow-inner' : 'border-black/5 hover:border-gold/30'}`}
+                          className={`p-4 md:p-6 text-left border transition-all duration-300 relative group active:scale-98 ${selectedServices.includes(s.id) ? 'border-gold bg-soft shadow-inner' : 'border-black/5 hover:border-gold/30'}`}
                         >
                           <div className="relative z-10 flex flex-col h-full">
-                            <div className="flex justify-between items-start mb-2">
-                              <p className="text-[9px] md:text-[10px] uppercase tracking-widest font-bold text-gold">{s.price}</p>
+                            <div className="flex justify-between items-start mb-1">
+                              <p className="text-[8px] md:text-[10px] uppercase tracking-widest font-bold text-gold">{s.price}</p>
                               {selectedServices.includes(s.id) && (
                                 <Zap className="w-3 h-3 text-gold fill-gold" />
                               )}
                             </div>
-                            <h4 className="text-lg md:text-xl font-serif mb-2 md:mb-4">{s.title}</h4>
-                            <p className="text-[9px] uppercase tracking-widest opacity-40 leading-relaxed">{s.desc}</p>
+                            <h4 className="text-sm md:text-xl font-serif">{s.title}</h4>
                           </div>
                         </button>
                       ))}
@@ -378,9 +377,9 @@ Terima kasih!`;
                     <button
                       onClick={() => setBookingStep(2)}
                       disabled={selectedServices.length === 0}
-                      className="btn-luxury w-full disabled:opacity-30 flex items-center justify-center gap-4 py-4 md:py-5"
+                      className="btn-luxury w-full disabled:opacity-30 flex items-center justify-center gap-4 py-3 md:py-5 mt-2"
                     >
-                      Next Step ({selectedServices.length}) <ArrowRight className="w-4 h-4" />
+                      Confirm ({selectedServices.length}) <ArrowRight className="w-4 h-4" />
                     </button>
                   </div>
                 )}
