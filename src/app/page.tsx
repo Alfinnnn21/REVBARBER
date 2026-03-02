@@ -117,12 +117,12 @@ Terima kasih!`;
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: "circOut" }}
           >
-            <h2 className="text-[9px] md:text-[10px] uppercase tracking-[0.6em] md:tracking-[0.8em] font-bold mb-4 md:mb-6 opacity-60">Redefining Classics</h2>
-            <h1 className="text-5xl md:text-8xl font-serif leading-tight md:leading-none mb-8 md:mb-10 tracking-tighter">
+            <h2 className="text-[9px] md:text-[10px] uppercase tracking-[0.6em] md:tracking-[0.8em] font-bold mb-4 md:mb-6 text-white opacity-80">Redefining Classics</h2>
+            <h1 className="text-5xl md:text-8xl font-serif leading-tight md:leading-none mb-8 md:mb-10 tracking-tighter text-white">
               Crafting <br /> <span className="italic pl-6 md:pl-24">Confidence</span>
             </h1>
             <div className="flex flex-wrap justify-center gap-4 md:gap-8">
-              <button onClick={() => handleBooking()} className="btn-luxury w-full md:w-auto">Explore Collection</button>
+              <button onClick={() => handleBooking()} className="btn-luxury w-full md:w-auto text-white">Explore Collection</button>
             </div>
           </motion.div>
         </div>
