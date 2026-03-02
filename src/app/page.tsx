@@ -166,64 +166,8 @@ Terima kasih!`;
         </div>
       </section>
 
-      {/* Services: Grid Sizing Fix */}
-      <section id="services" className="bg-soft section-padding">
-        <div className="container-custom">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 md:mb-32 gap-8 text-left">
-            <div className="w-full">
-              <h3 className="text-prestige text-gold mb-6">The Menu</h3>
-              <h2 className="text-5xl md:text-8xl font-serif leading-none">Exquisite<br /><span className="italic">Collection</span></h2>
-            </div>
-            <p className="w-full md:max-w-xs text-xs md:text-sm uppercase tracking-[0.15em] leading-loose opacity-50 font-medium">
-              A curated selection of grooming excellence for the modern gentleman.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {services.slice(0, 4).map((s, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -10 }}
-                className="luxury-card p-10 md:p-12 text-center flex flex-col items-center group relative overflow-hidden h-full"
-              >
-                <div className="text-gold/30 mb-8 md:mb-12 group-hover:text-gold transition-all duration-700 scale-150 transform">
-                  {(s as any).icon}
-                </div>
-                <h4 className="text-foreground text-xl md:text-2xl font-serif tracking-[0.05em] mb-4">{s.title}</h4>
-                <div className="w-12 h-[1px] bg-black/5 mb-6 md:mb-8 group-hover:w-24 transition-all duration-700 mx-auto" />
-                <p className="text-gold text-sm font-bold tracking-[0.25em] mb-10">{s.price}</p>
-                <button
-                  onClick={() => handleBooking(s.id)}
-                  className="text-prestige text-foreground hover:text-gold transition-colors flex items-center gap-4 mt-auto"
-                >
-                  Request Service <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
-                </button>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonial */}
-      <section className="py-24 md:py-32 bg-foreground text-white flex items-center justify-center overflow-hidden relative">
-        <Quote className="absolute -top-10 -left-10 w-48 h-48 md:w-96 md:h-96 opacity-5 rotate-12" />
-        <div className="max-w-4xl px-6 text-center space-y-8 md:space-y-12 relative z-10">
-          <div className="flex justify-center gap-1">
-            {[...Array(5)].map((_, i) => <Star key={i} className="w-3 h-3 md:w-4 md:h-4 fill-gold text-gold" />)}
-          </div>
-          <h2 className="text-2xl md:text-5xl font-serif leading-snug italic font-light">
-            "The atmosphere is pure luxury. It's not just about the haircut,
-            it's the way they treat you. A true gentlemen's sanctuary."
-          </h2>
-          <div className="space-y-2">
-            <div className="w-8 md:w-12 h-[1px] bg-gold mx-auto" />
-            <p className="text-[9px] md:text-[10px] uppercase tracking-[0.5em] font-bold text-gold">Johnathan Miller</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Expanded Price List Section: Editorial Style */}
-      <section className="bg-luxury py-24 md:py-40 text-white overflow-hidden relative">
+      {/* Unified Menu: Editorial Price List */}
+      <section id="services" className="bg-luxury py-24 md:py-40 text-white overflow-hidden relative">
         <div className="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none">
           <Scissors className="w-full h-full rotate-12 -mr-32" />
         </div>
@@ -231,7 +175,7 @@ Terima kasih!`;
         <div className="container-custom relative z-10">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16 md:mb-24">
-              <h3 className="text-prestige text-gold mb-6">Full Menu</h3>
+              <h3 className="text-prestige text-gold mb-6">The Menu</h3>
               <h2 className="text-5xl md:text-8xl font-serif">Price List</h2>
             </div>
 
@@ -262,6 +206,24 @@ Terima kasih!`;
                 Inquire Full Catalog
               </button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonial */}
+      <section className="py-24 md:py-32 bg-foreground text-white flex items-center justify-center overflow-hidden relative">
+        <Quote className="absolute -top-10 -left-10 w-48 h-48 md:w-96 md:h-96 opacity-5 rotate-12" />
+        <div className="max-w-4xl px-6 text-center space-y-8 md:space-y-12 relative z-10">
+          <div className="flex justify-center gap-1">
+            {[...Array(5)].map((_, i) => <Star key={i} className="w-3 h-3 md:w-4 md:h-4 fill-gold text-gold" />)}
+          </div>
+          <h2 className="text-2xl md:text-5xl font-serif leading-snug italic font-light">
+            "The atmosphere is pure luxury. It's not just about the haircut,
+            it's the way they treat you. A true gentlemen's sanctuary."
+          </h2>
+          <div className="space-y-2">
+            <div className="w-8 md:w-12 h-[1px] bg-gold mx-auto" />
+            <p className="text-[9px] md:text-[10px] uppercase tracking-[0.5em] font-bold text-gold">Johnathan Miller</p>
           </div>
         </div>
       </section>
