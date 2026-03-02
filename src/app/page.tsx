@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Scissors, Clock, MapPin, Phone, Instagram, Facebook, ArrowRight, Star, Quote, Zap, Wind } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { AnimatePresence } from "framer-motion";
 
 export default function Home() {
   const containerRef = useRef(null);
@@ -13,16 +14,47 @@ export default function Home() {
   });
 
   const services = [
-    { title: "HAIRCUT", icon: <Scissors className="w-8 h-8" />, desc: "Any cut to your taste followed by a professional finish." },
-    { title: "SHAVING", icon: <Scissors className="w-8 h-8 rotate-45" />, desc: "For premium result, at our barbershop, we combine traditional." },
-    { title: "STYLING", icon: <Wind className="w-8 h-8" />, desc: "Keep looking your best with our professional stylists." },
-    { title: "TRIMMING", icon: <Zap className="w-8 h-8" />, desc: "Looking to try something new with your facial hair." },
+    { title: "HAIRCUT", icon: <Scissors className="w-8 h-8" />, desc: "Any cut to your taste followed by a professional finish.", price: "Rp 150.000", id: "haircut" },
+    { title: "SHAVING", icon: <Scissors className="w-8 h-8 rotate-45" />, desc: "Commonly traditional shaving with a premium finish.", price: "Rp 100.000", id: "shaving" },
+    { title: "STYLING", icon: <Wind className="w-8 h-8" />, desc: "Keep looking your best with our professional stylists.", price: "Rp 75.000", id: "styling" },
+    { title: "TRIMMING", icon: <Zap className="w-8 h-8" />, desc: "Looking to try something new with your facial hair.", price: "Rp 85.000", id: "trimming" },
   ];
 
   const barbers = [
-    { name: "Marco V.", role: "Fade Specialist", image: "/images/ravbarber_hero_1772360063178.png" },
-    { name: "Andra K.", role: "Classic Scissoring", image: "/images/haircut_service_1772360078172.png" },
+    { name: "Marco V.", role: "Fade Specialist", image: "/images/ravbarber_hero_1772360063178.png", id: "marco" },
+    { name: "Andra K.", role: "Classic Scissoring", image: "/images/haircut_service_1772360078172.png", id: "andra" },
   ];
+
+  const timeSlots = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"];
+
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [bookingStep, setBookingStep] = useState(1);
+  const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [selectedBarber, setSelectedBarber] = useState<string | null>(null);
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [bookingInfo, setBookingInfo] = useState({ name: "", phone: "" });
+
+  const handleBooking = (serviceId?: string) => {
+    if (serviceId) setSelectedService(serviceId);
+    setIsBookingOpen(true);
+    setBookingStep(1);
+  };
+
+  const handleWhatsApp = () => {
+    const service = services.find(s => s.id === selectedService)?.title || "";
+    const barber = barbers.find(b => b.id === selectedBarber)?.name || "Any Barber";
+    const text = `Halo RAVBARBER, saya ingin booking layanan:
+Layanan: ${service}
+Barber: ${barber}
+Waktu: ${selectedTime}
+Nama: ${bookingInfo.name}
+Telepon: ${bookingInfo.phone}
+
+Terima kasih!`;
+    const encodedText = encodeURIComponent(text);
+    window.open(`https://wa.me/6281234567890?text=${encodedText}`, "_blank");
+    setIsBookingOpen(false);
+  };
 
   return (
     <main ref={containerRef} className="bg-white text-foreground selection:bg-gold selection:text-white overflow-x-hidden">
@@ -39,7 +71,10 @@ export default function Home() {
           <a href="#barbers" className="hover:text-gold transition-colors">Masters</a>
           <a href="#contact" className="hover:text-gold transition-colors">Contact</a>
         </div>
-        <button className="border-b border-white/30 pb-1 text-[10px] uppercase tracking-[0.3em] font-bold hover:border-white transition-all">
+        <button
+          onClick={() => handleBooking()}
+          className="border-b border-white/30 pb-1 text-[10px] uppercase tracking-[0.3em] font-bold hover:border-white transition-all"
+        >
           Reservations
         </button>
       </nav>
@@ -74,7 +109,7 @@ export default function Home() {
               Crafting <br /> <span className="italic pl-12 md:pl-24">Confidence</span>
             </h1>
             <div className="flex flex-wrap justify-center gap-8">
-              <button className="btn-luxury">Explore Collection</button>
+              <button onClick={() => handleBooking()} className="btn-luxury">Explore Collection</button>
             </div>
           </motion.div>
         </div>
@@ -108,8 +143,8 @@ export default function Home() {
             beyond the chair.
           </p>
           <div className="pt-8">
-            <a href="#" className="inline-flex items-center gap-4 text-xs font-bold uppercase tracking-[0.3em] group">
-              Our Story <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+            <a href="#services" className="inline-flex items-center gap-4 text-xs font-bold uppercase tracking-[0.3em] group">
+              Our Services <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
             </a>
           </div>
         </div>
@@ -138,12 +173,16 @@ export default function Home() {
                 <div className="text-gold/60 mb-8 group-hover:text-gold transition-colors">
                   {(s as any).icon}
                 </div>
-                <h4 className="text-white text-xl font-serif tracking-[0.2em] mb-6">{s.title}</h4>
+                <h4 className="text-white text-xl font-serif tracking-[0.2em] mb-4">{s.title}</h4>
+                <p className="text-gold text-sm font-bold tracking-[0.2em] mb-6">{s.price}</p>
                 <p className="text-white/40 text-[11px] leading-relaxed mb-8 uppercase tracking-widest h-12">
                   {s.desc}
                 </p>
-                <button className="text-[10px] text-gold/80 font-bold uppercase tracking-[0.2em] flex items-center gap-2 hover:text-gold transition-colors">
-                  Read More <ArrowRight className="w-3 h-3" />
+                <button
+                  onClick={() => handleBooking(s.id)}
+                  className="text-[10px] text-gold/80 font-bold uppercase tracking-[0.2em] flex items-center gap-2 hover:text-gold transition-colors"
+                >
+                  Book Now <ArrowRight className="w-3 h-3" />
                 </button>
               </motion.div>
             ))}
@@ -230,7 +269,12 @@ export default function Home() {
             </div>
             <div className="space-y-8">
               <h5 className="text-[10px] uppercase tracking-[0.3em] font-bold text-gold">Booking</h5>
-              <button className="btn-luxury w-full">Claim your spot</button>
+              <button
+                onClick={() => handleBooking()}
+                className="btn-luxury w-full"
+              >
+                Claim your spot
+              </button>
               <p className="text-[8px] uppercase tracking-widest opacity-40 text-center">Appointments recommended</p>
             </div>
           </div>
@@ -244,6 +288,180 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href="https://wa.me/6281234567890?text=Halo%20RAVBARBER%2C%20saya%20ingin%20booking%20layanan..."
+        target="_blank"
+        className="float-wa hidden md:flex"
+      >
+        <Phone className="w-4 h-4" />
+        Booking Now
+      </a>
+
+      {/* Mobile Floating Button */}
+      <div className="fixed bottom-0 left-0 w-full p-4 z-[150] md:hidden">
+        <button
+          onClick={() => handleBooking()}
+          className="w-full bg-gold text-white p-4 font-bold uppercase tracking-[0.3em] text-[10px] shadow-2xl rounded-none"
+        >
+          Instant Booking
+        </button>
+      </div>
+
+      {/* Booking Modal */}
+      <AnimatePresence>
+        {isBookingOpen && (
+          <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsBookingOpen(false)}
+              className="absolute inset-0 bg-black/95 backdrop-blur-md"
+            />
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 40 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 40 }}
+              className="relative w-full max-w-2xl bg-white text-foreground p-8 md:p-12 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border border-black/5"
+            >
+              <button
+                onClick={() => setIsBookingOpen(false)}
+                className="absolute top-8 right-8 text-black/20 hover:text-black hover:rotate-90 transition-all duration-300"
+              >
+                <Zap className="w-8 h-8 rotate-45" />
+              </button>
+
+              <div className="mb-12">
+                <div className="flex items-center gap-4 mb-4">
+                  <span className="h-[1px] w-8 bg-gold" />
+                  <h3 className="text-[10px] uppercase tracking-[0.5em] font-bold text-gold">Step 0{bookingStep} / 04</h3>
+                </div>
+                <h2 className="text-4xl md:text-5xl font-serif">
+                  {bookingStep === 1 && "Select Service"}
+                  {bookingStep === 2 && "Choose Master"}
+                  {bookingStep === 3 && "Pick Schedule"}
+                  {bookingStep === 4 && "Finalize Appointment"}
+                </h2>
+              </div>
+
+              <div className="min-h-[350px]">
+                {/* Step 1: Service */}
+                {bookingStep === 1 && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {services.map((s) => (
+                      <button
+                        key={s.id}
+                        onClick={() => { setSelectedService(s.id); setBookingStep(2); }}
+                        className={`p-6 text-left border transition-all duration-500 overflow-hidden relative group ${selectedService === s.id ? 'border-gold bg-soft' : 'border-black/5 hover:border-gold/30'}`}
+                      >
+                        <div className="relative z-10 flex flex-col h-full">
+                          <p className="text-[10px] uppercase tracking-widest font-bold mb-2 text-gold">{s.price}</p>
+                          <h4 className="text-xl font-serif mb-4">{s.title}</h4>
+                          <p className="text-[10px] uppercase tracking-widest opacity-40 leading-relaxed">{s.desc}</p>
+                        </div>
+                        <div className={`absolute bottom-0 left-0 h-1 bg-gold transition-all duration-700 ${selectedService === s.id ? 'w-full' : 'w-0 group-hover:w-1/2'}`} />
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {/* Step 2: Barber */}
+                {bookingStep === 2 && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {barbers.map((b) => (
+                      <button
+                        key={b.id}
+                        onClick={() => { setSelectedBarber(b.id); setBookingStep(3); }}
+                        className={`group p-6 text-left border transition-all duration-500 overflow-hidden relative ${selectedBarber === b.id ? 'border-gold bg-soft' : 'border-black/5 hover:border-gold/30'}`}
+                      >
+                        <div className="relative z-10">
+                          <p className="text-[10px] uppercase tracking-widest font-bold mb-2 opacity-40 group-hover:opacity-100 transition-opacity">{b.role}</p>
+                          <h4 className="text-xl font-serif">{b.name}</h4>
+                        </div>
+                        <div className={`absolute bottom-0 left-0 h-1 bg-gold transition-all duration-700 ${selectedBarber === b.id ? 'w-full' : 'w-0 group-hover:w-1/2'}`} />
+                      </button>
+                    ))}
+                    <button
+                      onClick={() => { setSelectedBarber(null); setBookingStep(3); }}
+                      className={`p-6 text-left border transition-all duration-500 relative group ${selectedBarber === null ? 'border-gold bg-soft' : 'border-black/5 hover:border-gold/30'}`}
+                    >
+                      <div className="relative z-10">
+                        <p className="text-[10px] uppercase tracking-widest font-bold mb-2">Available Master</p>
+                        <h4 className="text-xl font-serif text-black/60">No Preference</h4>
+                      </div>
+                      <div className={`absolute bottom-0 left-0 h-1 bg-gold transition-all duration-700 ${selectedBarber === null ? 'w-full' : 'w-0 group-hover:w-1/2'}`} />
+                    </button>
+                  </div>
+                )}
+
+                {/* Step 3: Time */}
+                {bookingStep === 3 && (
+                  <div className="grid grid-cols-3 md:grid-cols-4 gap-3">
+                    {timeSlots.map((t) => (
+                      <button
+                        key={t}
+                        onClick={() => { setSelectedTime(t); setBookingStep(4); }}
+                        className={`py-6 px-4 text-center text-[10px] font-bold tracking-widest border transition-all duration-300 relative group ${selectedTime === t ? 'border-gold bg-gold text-white' : 'border-black/5 hover:border-gold/30'}`}
+                      >
+                        {t}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {/* Step 4: Info */}
+                {bookingStep === 4 && (
+                  <div className="space-y-10">
+                    <div className="grid md:grid-cols-2 gap-8">
+                      <div className="space-y-2">
+                        <label className="text-[10px] uppercase tracking-[0.3em] font-bold opacity-40">Your full Name</label>
+                        <input
+                          type="text"
+                          value={bookingInfo.name}
+                          onChange={(e) => setBookingInfo({ ...bookingInfo, name: e.target.value })}
+                          placeholder="required"
+                          className="w-full border-b border-black/10 py-4 focus:border-gold outline-none transition-colors font-serif text-xl placeholder:opacity-20"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-[10px] uppercase tracking-[0.3em] font-bold opacity-40">Mobile phone</label>
+                        <input
+                          type="tel"
+                          value={bookingInfo.phone}
+                          onChange={(e) => setBookingInfo({ ...bookingInfo, phone: e.target.value })}
+                          placeholder="ex. 0812..."
+                          className="w-full border-b border-black/10 py-4 focus:border-gold outline-none transition-colors font-serif text-xl placeholder:opacity-20"
+                        />
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={handleWhatsApp}
+                      disabled={!bookingInfo.name || !bookingInfo.phone}
+                      className="btn-luxury w-full disabled:opacity-30 disabled:cursor-not-allowed group flex items-center justify-center gap-6 py-6"
+                    >
+                      Confirm via WhatsApp <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-all" />
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {bookingStep > 1 && (
+                <button
+                  onClick={() => setBookingStep(prev => prev - 1)}
+                  className="mt-12 text-[10px] uppercase tracking-[0.5em] font-bold opacity-30 hover:opacity-100 transition-opacity flex items-center gap-2"
+                >
+                  <span className="scale-x-[-1] inline-block">→</span> Previous Step
+                </button>
+              )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
     </main>
   );

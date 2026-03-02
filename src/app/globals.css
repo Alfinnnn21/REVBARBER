@@ -43,8 +43,13 @@
 
 .glass {
   background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(142, 109, 16, 0.1);
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(142, 109, 16, 0.1);
+}
+
+.float-wa {
+  @apply fixed bottom-8 right-8 z-[150] bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 flex items-center gap-3 font-bold text-xs uppercase tracking-widest;
+  box-shadow: 0 10px 30px -10px rgba(37, 211, 102, 0.5);
 }
 
 .gold-gradient {
