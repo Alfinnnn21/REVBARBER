@@ -337,12 +337,12 @@ Terima kasih!`;
                 <Zap className="w-6 h-6 md:w-8 md:h-8 rotate-45" />
               </button>
 
-              <div className="mb-8 md:mb-12">
-                <div className="flex items-center gap-4 mb-4">
+              <div className="mb-6 md:mb-8">
+                <div className="flex items-center gap-4 mb-2">
                   <span className="h-[1px] w-6 md:w-8 bg-gold" />
                   <h3 className="text-[9px] md:text-[10px] uppercase tracking-[0.5em] font-bold text-gold">Step 0{bookingStep} / 04</h3>
                 </div>
-                <h2 className="text-3xl md:text-5xl font-serif">
+                <h2 className="text-2xl md:text-4xl font-serif">
                   {bookingStep === 1 && "Select Service"}
                   {bookingStep === 2 && "Choose Master"}
                   {bookingStep === 3 && "Pick Schedule"}
@@ -359,16 +359,16 @@ Terima kasih!`;
                         <button
                           key={s.id}
                           onClick={() => toggleService(s.id)}
-                          className={`p-4 md:p-6 text-left border transition-all duration-300 relative group active:scale-98 ${selectedServices.includes(s.id) ? 'border-gold bg-soft shadow-inner' : 'border-black/5 hover:border-gold/30'}`}
+                          className={`p-3 md:p-5 text-left border transition-all duration-300 relative group active:scale-98 ${selectedServices.includes(s.id) ? 'border-gold bg-soft shadow-inner' : 'border-black/5 hover:border-gold/30'}`}
                         >
                           <div className="relative z-10 flex flex-col h-full">
-                            <div className="flex justify-between items-start mb-1">
-                              <p className="text-[8px] md:text-[10px] uppercase tracking-widest font-bold text-gold">{s.price}</p>
+                            <div className="flex justify-between items-start">
+                              <p className="text-[8px] md:text-[9px] uppercase tracking-widest font-bold text-gold">{s.price}</p>
                               {selectedServices.includes(s.id) && (
-                                <Zap className="w-3 h-3 text-gold fill-gold" />
+                                <Zap className="w-2.5 h-2.5 text-gold fill-gold" />
                               )}
                             </div>
-                            <h4 className="text-sm md:text-xl font-serif">{s.title}</h4>
+                            <h4 className="text-sm md:text-lg font-serif">{s.title}</h4>
                           </div>
                         </button>
                       ))}
@@ -386,25 +386,23 @@ Terima kasih!`;
 
                 {/* Step 2: Barber */}
                 {bookingStep === 2 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+                  <div className="grid grid-cols-2 gap-2 md:gap-4">
                     {barbers.map((b) => (
                       <button
                         key={b.id}
                         onClick={() => { setSelectedBarber(b.id); setBookingStep(3); }}
-                        className={`p-5 md:p-6 text-left border transition-all duration-300 overflow-hidden relative ${selectedBarber === b.id ? 'border-gold bg-soft' : 'border-black/5'}`}
+                        className={`p-4 md:p-6 text-left border transition-all duration-300 overflow-hidden relative ${selectedBarber === b.id ? 'border-gold bg-soft' : 'border-black/5'}`}
                       >
                         <div className="relative z-10">
-                          <p className="text-[9px] uppercase tracking-widest font-bold mb-1 opacity-40">{b.role}</p>
-                          <h4 className="text-lg font-serif">{b.name}</h4>
+                          <h4 className="text-sm md:text-lg font-serif">{b.name}</h4>
                         </div>
                       </button>
                     ))}
                     <button
                       onClick={() => { setSelectedBarber(null); setBookingStep(3); }}
-                      className={`p-5 md:p-6 text-left border transition-all duration-300 relative ${selectedBarber === null ? 'border-gold bg-soft' : 'border-black/5'}`}
+                      className={`p-4 md:p-6 text-left border transition-all duration-300 relative ${selectedBarber === null ? 'border-gold bg-soft' : 'border-black/5'}`}
                     >
-                      <p className="text-[9px] uppercase tracking-widest font-bold mb-1">Random</p>
-                      <h4 className="text-lg font-serif">Any Master</h4>
+                      <h4 className="text-sm md:text-lg font-serif">Any Master</h4>
                     </button>
                   </div>
                 )}
@@ -426,26 +424,26 @@ Terima kasih!`;
 
                 {/* Step 4: Info */}
                 {bookingStep === 4 && (
-                  <div className="space-y-8 md:space-y-10">
-                    <div className="grid grid-cols-1 gap-6 md:gap-8">
-                      <div className="space-y-2">
-                        <label className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold opacity-40">Name</label>
+                  <div className="space-y-6 md:space-y-8">
+                    <div className="grid grid-cols-1 gap-4 md:gap-6">
+                      <div className="space-y-1">
+                        <label className="text-[8px] md:text-[9px] uppercase tracking-[0.2em] font-bold opacity-30">Full Name</label>
                         <input
                           type="text"
                           value={bookingInfo.name}
                           onChange={(e) => setBookingInfo({ ...bookingInfo, name: e.target.value })}
                           placeholder="Your identity"
-                          className="w-full border-b border-black/10 py-3 md:py-4 focus:border-gold outline-none transition-colors font-serif text-lg md:text-xl"
+                          className="w-full border-b border-black/10 py-2 md:py-3 focus:border-gold outline-none transition-colors font-serif text-base md:text-lg"
                         />
                       </div>
-                      <div className="space-y-2">
-                        <label className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold opacity-40">WhatsApp Number</label>
+                      <div className="space-y-1">
+                        <label className="text-[8px] md:text-[9px] uppercase tracking-[0.2em] font-bold opacity-30">WhatsApp Number</label>
                         <input
                           type="tel"
                           value={bookingInfo.phone}
                           onChange={(e) => setBookingInfo({ ...bookingInfo, phone: e.target.value })}
                           placeholder="ex. 0812..."
-                          className="w-full border-b border-black/10 py-3 md:py-4 focus:border-gold outline-none transition-colors font-serif text-lg md:text-xl"
+                          className="w-full border-b border-black/10 py-2 md:py-3 focus:border-gold outline-none transition-colors font-serif text-base md:text-lg"
                         />
                       </div>
                     </div>
