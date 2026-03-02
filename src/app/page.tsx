@@ -180,17 +180,14 @@ Terima kasih!`;
             {services.map((s, i) => (
               <motion.div
                 key={i}
-                whileHover={{ y: -8 }}
-                className="bg-[#111] p-8 md:p-10 text-center flex flex-col items-center group transition-all"
+                whileHover={{ y: -5 }}
+                className="bg-[#111] p-6 md:p-8 text-center flex flex-col items-center group transition-all"
               >
-                <div className="text-gold/60 mb-6 group-hover:text-gold transition-colors">
+                <div className="text-gold/60 mb-4 group-hover:text-gold transition-colors">
                   {(s as any).icon}
                 </div>
-                <h4 className="text-white text-lg md:text-xl font-serif tracking-[0.1em] md:tracking-[0.2em] mb-3">{s.title}</h4>
-                <p className="text-gold text-xs md:text-sm font-bold tracking-[0.2em] mb-4 md:mb-6">{s.price}</p>
-                <p className="text-white/40 text-[10px] leading-relaxed mb-6 md:mb-8 uppercase tracking-widest h-auto md:h-12">
-                  {s.desc}
-                </p>
+                <h4 className="text-white text-base md:text-lg font-serif tracking-[0.1em] md:tracking-[0.2em] mb-2">{s.title}</h4>
+                <p className="text-gold text-xs md:text-sm font-bold tracking-[0.2em] mb-6">{s.price}</p>
                 <button
                   onClick={() => handleBooking(s.id)}
                   className="text-[9px] md:text-[10px] text-gold/80 font-bold uppercase tracking-[0.2em] flex items-center gap-2 hover:text-gold transition-colors"
