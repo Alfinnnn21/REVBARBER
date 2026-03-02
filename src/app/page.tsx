@@ -13,10 +13,12 @@ export default function Home() {
   });
 
   const services = [
-    { title: "HAIRCUT", icon: <Scissors className="w-8 h-8" />, desc: "", price: "Rp 150.000", id: "haircut" },
-    { title: "SHAVING", icon: <Scissors className="w-8 h-8 rotate-45" />, desc: "", price: "Rp 100.000", id: "shaving" },
-    { title: "STYLING", icon: <Wind className="w-8 h-8" />, desc: "", price: "Rp 75.000", id: "styling" },
-    { title: "TRIMMING", icon: <Zap className="w-8 h-8" />, desc: "", price: "Rp 85.000", id: "trimming" },
+    { title: "SIGNATURE WASH & CUT", icon: <Scissors className="w-8 h-8" />, desc: "Premium washing + master cutting with razor finish.", price: "Rp 180.000", id: "sig_cut" },
+    { title: "CLASSIC HAIRCUT", icon: <Scissors className="w-8 h-8 rotate-45" />, desc: "Traditional cutting followed by a professional finish.", price: "Rp 150.000", id: "classic_cut" },
+    { title: "ROYAL SHAVING", icon: <Wind className="w-8 h-8" />, desc: "Hot towel treatment with double edge razor shave.", price: "Rp 120.000", id: "royal_shave" },
+    { title: "BEARD SCULPTING", icon: <Zap className="w-8 h-8" />, desc: "Precise beard trimming and shaping.", price: "Rp 90.000", id: "beard_sculpt" },
+    { title: "HEAD TREATMENT", icon: <Scissors className="w-8 h-8" />, desc: "Exfoliating wash with relaxing head massage.", price: "Rp 130.000", id: "head_treat" },
+    { title: "GROOMING & STYLING", icon: <Wind className="w-8 h-8" />, desc: "Quick wash and professional hair styling.", price: "Rp 80.000", id: "styling" },
   ];
 
   const barbers = [
@@ -178,7 +180,7 @@ Terima kasih!`;
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {services.map((s, i) => (
+            {services.slice(0, 4).map((s, i) => (
               <motion.div
                 key={i}
                 whileHover={{ y: -10 }}
@@ -198,6 +200,68 @@ Terima kasih!`;
                 </button>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonial */}
+      <section className="py-24 md:py-32 bg-foreground text-white flex items-center justify-center overflow-hidden relative">
+        <Quote className="absolute -top-10 -left-10 w-48 h-48 md:w-96 md:h-96 opacity-5 rotate-12" />
+        <div className="max-w-4xl px-6 text-center space-y-8 md:space-y-12 relative z-10">
+          <div className="flex justify-center gap-1">
+            {[...Array(5)].map((_, i) => <Star key={i} className="w-3 h-3 md:w-4 md:h-4 fill-gold text-gold" />)}
+          </div>
+          <h2 className="text-2xl md:text-5xl font-serif leading-snug italic font-light">
+            "The atmosphere is pure luxury. It's not just about the haircut,
+            it's the way they treat you. A true gentlemen's sanctuary."
+          </h2>
+          <div className="space-y-2">
+            <div className="w-8 md:w-12 h-[1px] bg-gold mx-auto" />
+            <p className="text-[9px] md:text-[10px] uppercase tracking-[0.5em] font-bold text-gold">Johnathan Miller</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Expanded Price List Section: Editorial Style */}
+      <section className="bg-luxury py-24 md:py-40 text-white overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none">
+          <Scissors className="w-full h-full rotate-12 -mr-32" />
+        </div>
+
+        <div className="container-custom relative z-10">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16 md:mb-24">
+              <h3 className="text-prestige text-gold mb-6">Full Menu</h3>
+              <h2 className="text-5xl md:text-8xl font-serif">Price List</h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10 md:gap-y-16">
+              {services.map((s, i) => (
+                <button
+                  key={i}
+                  onClick={() => handleBooking(s.id)}
+                  className="group flex flex-col items-start gap-3 w-full text-left"
+                >
+                  <div className="flex justify-between items-end w-full border-b border-white/10 pb-4 group-hover:border-gold/50 transition-colors duration-500">
+                    <h4 className="text-lg md:text-xl font-serif tracking-wide group-hover:text-gold transition-colors">{s.title}</h4>
+                    <span className="text-gold font-bold text-sm tracking-widest">{s.price}</span>
+                  </div>
+                  <p className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/40 leading-relaxed font-light">
+                    {s.desc}
+                  </p>
+                </button>
+              ))}
+            </div>
+
+            <div className="mt-20 md:mt-32 text-center">
+              <p className="text-prestige text-white/30 mb-8 italic">Custom packages available upon request</p>
+              <button
+                onClick={() => handleBooking()}
+                className="btn-luxury border-white/10 text-white hover:border-gold"
+              >
+                Inquire Full Catalog
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -222,24 +286,6 @@ Terima kasih!`;
               </div>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* Testimonial */}
-      <section className="py-24 md:py-32 bg-foreground text-white flex items-center justify-center overflow-hidden relative">
-        <Quote className="absolute -top-10 -left-10 w-48 h-48 md:w-96 md:h-96 opacity-5 rotate-12" />
-        <div className="max-w-4xl px-6 text-center space-y-8 md:space-y-12 relative z-10">
-          <div className="flex justify-center gap-1">
-            {[...Array(5)].map((_, i) => <Star key={i} className="w-3 h-3 md:w-4 md:h-4 fill-gold text-gold" />)}
-          </div>
-          <h2 className="text-2xl md:text-5xl font-serif leading-snug italic font-light">
-            "The atmosphere is pure luxury. It's not just about the haircut,
-            it's the way they treat you. A true gentlemen's sanctuary."
-          </h2>
-          <div className="space-y-2">
-            <div className="w-8 md:w-12 h-[1px] bg-gold mx-auto" />
-            <p className="text-[9px] md:text-[10px] uppercase tracking-[0.5em] font-bold text-gold">Johnathan Miller</p>
-          </div>
         </div>
       </section>
 
